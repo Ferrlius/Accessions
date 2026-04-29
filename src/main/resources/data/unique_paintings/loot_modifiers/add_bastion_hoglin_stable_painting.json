@@ -1,0 +1,14 @@
+{
+  "type": "unique_paintings:painting_loot",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:chests/bastion_hoglin_stable"
+    },
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.3
+    }
+  ],
+  "theme": "unique_paintings:nether"
+}

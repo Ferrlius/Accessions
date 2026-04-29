@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "ru.ferrlius.unique_paintings.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "PaintingMixin",
+    "HangingEntityItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

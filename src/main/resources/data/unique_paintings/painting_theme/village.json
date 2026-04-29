@@ -1,0 +1,13 @@
+{
+  "variants": [
+    { "id": "minecraft:bouquet", "weight": 3 },
+    { "id": "minecraft:cotan", "weight": 1, "rarity": "uncommon" },
+    { "id": "minecraft:courbet", "weight": 1, "rarity": "uncommon" },
+    { "id": "minecraft:plant", "weight": 4 },
+    { "id": "minecraft:sunflowers", "weight": 4 },
+    { "id": "minecraft:sunset", "weight": 3 },
+    { "id": "minecraft:pond", "weight": 2 },
+    { "id": "minecraft:wanderer", "weight": 2 },
+    { "id": "minecraft:humble", "weight": 2 }
+  ]
+}

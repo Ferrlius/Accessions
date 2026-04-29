@@ -1,0 +1,19 @@
+{
+  "theme": "unique_paintings:ominous",
+  "variants": [
+    { "id": "portfolio:awful_housing", "weight": 1 },
+    { "id": "portfolio:crusty", "weight": 2 },
+    { "id": "portfolio:death", "weight": 2 },
+    { "id": "portfolio:eye", "weight": 2 },
+    { "id": "portfolio:operator", "weight": 4 },
+    { "id": "portfolio:greatsword", "weight": 3 },
+    { "id": "portfolio:justice", "weight": 1 },
+    { "id": "portfolio:pixel_gobelin", "weight": 1 },
+    { "id": "portfolio:randomtickspeed", "weight": 2 },
+    { "id": "portfolio:serpent", "weight": 2 },
+    { "id": "portfolio:slime_chunk", "weight": 2 },
+    { "id": "portfolio:squid_games", "weight": 2 },
+    { "id": "portfolio:vice", "weight": 2 },
+    { "id": "portfolio:wrong_side", "weight": 2 }
+  ]
+}

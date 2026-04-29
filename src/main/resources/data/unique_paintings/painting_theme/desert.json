@@ -1,0 +1,10 @@
+{
+  "variants": [
+    { "id": "minecraft:aztec", "weight": 4 },
+    { "id": "minecraft:aztec2", "weight": 4 },
+    { "id": "minecraft:wasteland", "weight": 5 },
+    { "id": "minecraft:prairie_ride", "weight": 3 },
+    { "id": "minecraft:sunset", "weight": 2 },
+    { "id": "minecraft:kebab", "weight": 2 }
+  ]
+}

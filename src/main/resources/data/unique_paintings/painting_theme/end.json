@@ -1,0 +1,10 @@
+{
+  "variants": [
+    { "id": "minecraft:void", "weight": 5, "rarity": "rare" },
+    { "id": "minecraft:endboss", "weight": 5, "rarity": "epic" },
+    { "id": "minecraft:orb", "weight": 3, "rarity": "rare" },
+    { "id": "minecraft:changing", "weight": 2, "rarity": "uncommon" },
+    { "id": "minecraft:passage", "weight": 3, "rarity": "rare" },
+    { "id": "minecraft:wanderer", "weight": 2, "rarity": "uncommon" }
+  ]
+}

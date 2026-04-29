@@ -1,0 +1,20 @@
+{
+  "variants": [
+    { "id": "minecraft:baroque", "weight": 4, "rarity": "rare" },
+    { "id": "minecraft:bouquet", "weight": 3, "rarity": "uncommon" },
+    { "id": "minecraft:bust", "weight": 3, "rarity": "rare" },
+    { "id": "minecraft:cotan", "weight": 2, "rarity": "uncommon" },
+    { "id": "minecraft:courbet", "weight": 2, "rarity": "uncommon" },
+    { "id": "minecraft:pool", "weight": 3, "rarity": "uncommon" },
+    { "id": "minecraft:sunset", "weight": 2, "rarity": "uncommon" },
+    { "id": "minecraft:humble", "weight": 2, "rarity": "uncommon" },
+    { "id": "minecraft:pond", "weight": 2, "rarity": "uncommon" },
+    { "id": "minecraft:sea", "weight": 2, "rarity": "uncommon" },
+    { "id": "minecraft:water", "weight": 2, "rarity": "uncommon" },
+    { "id": "minecraft:fern", "weight": 2, "rarity": "uncommon" },
+    { "id": "minecraft:sunflowers", "weight": 2, "rarity": "uncommon" },
+    { "id": "minecraft:wasteland", "weight": 2, "rarity": "uncommon" },
+    { "id": "minecraft:creebet", "weight": 2, "rarity": "rare" },
+    { "id": "minecraft:pointer", "weight": 1, "rarity": "uncommon" }
+  ]
+}

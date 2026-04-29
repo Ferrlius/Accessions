@@ -1,0 +1,22 @@
+{
+  "theme": "unique_paintings:end",
+  "variants": [
+    { "id": "portfolio:alpha", "weight": 2, "rarity": "uncommon" },
+    { "id": "portfolio:beta", "weight": 2, "rarity": "uncommon" },
+    { "id": "portfolio:cave_game", "weight": 2, "rarity": "uncommon" },
+    { "id": "portfolio:endy_warhol", "weight": 2, "rarity": "rare" },
+    { "id": "portfolio:void_manor", "weight": 4, "rarity": "rare" },
+    { "id": "portfolio:farlander", "weight": 3, "rarity": "rare" },
+    { "id": "portfolio:generator", "weight": 2, "rarity": "uncommon" },
+    { "id": "portfolio:heavens_ladder", "weight": 2, "rarity": "rare" },
+    { "id": "portfolio:macrocosm", "weight": 2, "rarity": "rare" },
+    { "id": "portfolio:mode_creative", "weight": 2, "rarity": "rare" },
+    { "id": "portfolio:pixel_gobelin", "weight": 1, "rarity": "rare" },
+    { "id": "portfolio:randomtickspeed", "weight": 2, "rarity": "uncommon" },
+    { "id": "portfolio:the_far_lands", "weight": 3, "rarity": "epic" },
+    { "id": "portfolio:the_far_lands_alt", "weight": 2, "rarity": "rare" },
+    { "id": "portfolio:the_painting_at_end_of_catalogue", "weight": 2, "rarity": "epic" },
+    { "id": "portfolio:unwrap", "weight": 1, "rarity": "rare" },
+    { "id": "portfolio:yonder", "weight": 1, "rarity": "uncommon" }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "theme": "unique_paintings:stronghold",
+  "variants": [
+    { "id": "portfolio:beta", "weight": 1 },
+    { "id": "portfolio:cave_game", "weight": 1 },
+    { "id": "portfolio:endy_warhol", "weight": 1 },
+    { "id": "portfolio:macrocosm", "weight": 3 },
+    { "id": "portfolio:iconography", "weight": 3 },
+    { "id": "portfolio:film", "weight": 2 },
+    { "id": "portfolio:gears", "weight": 2 },
+    { "id": "portfolio:generator", "weight": 1 },
+    { "id": "portfolio:heartbeat", "weight": 2 },
+    { "id": "portfolio:journeys_end", "weight": 2 },
+    { "id": "portfolio:mode_creative", "weight": 2 },
+    { "id": "portfolio:oak_door", "weight": 2 },
+    { "id": "portfolio:shapes", "weight": 2 },
+    { "id": "portfolio:stair_hall", "weight": 2 },
+    { "id": "portfolio:statue", "weight": 2 },
+    { "id": "portfolio:the_painting_at_end_of_catalogue", "weight": 1 },
+    { "id": "portfolio:unwrap", "weight": 1 },
+    { "id": "portfolio:jazz_town", "weight": 1 },
+    { "id": "portfolio:morning_on_the_seine", "weight": 1 },
+    { "id": "portfolio:oak_door", "weight": 1 },
+    { "id": "portfolio:picturesque", "weight": 1 },
+    { "id": "portfolio:table", "weight": 1 }
+  ]
+}
