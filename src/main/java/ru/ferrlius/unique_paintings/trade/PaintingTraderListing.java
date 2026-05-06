@@ -13,6 +13,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import ru.ferrlius.unique_paintings.data.PaintingThemeManager;
+import ru.ferrlius.unique_paintings.registry.ModPaintingVariants;
 import ru.ferrlius.unique_paintings.util.PaintingStackHelper;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public final class PaintingTraderListing {
         Registry<PaintingVariant> registry = trader.registryAccess().registryOrThrow(Registries.PAINTING_VARIANT);
         List<ResourceLocation> pool = new ArrayList<>(PaintingThemeManager.getAllVariantIds());
         pool.removeIf(excludedVariants::contains);
+        pool.removeIf(ModPaintingVariants::isErrorVariant);
         pool.removeIf(variantId -> registry.getHolder(ResourceKey.create(Registries.PAINTING_VARIANT, variantId)).isEmpty());
 
         if (pool.isEmpty()) {

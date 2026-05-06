@@ -51,11 +51,7 @@ public abstract class HangingEntityItemMixin {
             return;
         }
 
-        if (PaintingStackHelper.sanitizeInvalidVariant(stack, context.getLevel().registryAccess())) {
-            return;
-        }
-
-        Holder<PaintingVariant> variant = PaintingStackHelper.getSavedVariant(
+        Holder<PaintingVariant> variant = PaintingStackHelper.getPlacementVariant(
                 stack,
                 context.getLevel().registryAccess()
         ).orElse(null);
@@ -77,6 +73,9 @@ public abstract class HangingEntityItemMixin {
 
         Level level = context.getLevel();
         Painting painting = new Painting(level, placePos, direction, variant);
+        if (PaintingStackHelper.isMissingVariant(stack, context.getLevel().registryAccess())) {
+            PaintingStackHelper.markMissingPaintingEntity(painting, stack);
+        }
 
         if (!painting.survives()) {
             cir.setReturnValue(InteractionResult.CONSUME);

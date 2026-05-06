@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.level.Level;
+import ru.ferrlius.unique_paintings.registry.ModPaintingVariants;
 
 import java.util.List;
 
@@ -24,7 +25,9 @@ public class PaintingThemeResolver {
                         .registryOrThrow(Registries.PAINTING_VARIANT);
 
         if (variants.isEmpty()) {
-            return registry.getAny()
+            return registry.holders()
+                    .filter(holder -> holder.unwrapKey().map(key -> !ModPaintingVariants.isErrorVariant(key.location())).orElse(true))
+                    .findFirst()
                     .orElseThrow();
         }
 
@@ -49,7 +52,10 @@ public class PaintingThemeResolver {
         }
 
         if (resolvedVariants.isEmpty()) {
-            return registry.getAny().orElseThrow();
+            return registry.holders()
+                    .filter(holder -> holder.unwrapKey().map(key -> !ModPaintingVariants.isErrorVariant(key.location())).orElse(true))
+                    .findFirst()
+                    .orElseThrow();
         }
 
         int chosenWeight = random.nextInt(totalWeight);

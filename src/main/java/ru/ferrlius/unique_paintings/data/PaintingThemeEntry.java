@@ -5,3 +5,4 @@ import net.minecraft.world.item.Rarity;
 
 public record PaintingThemeEntry(ResourceLocation variantId, int weight, Rarity rarity) {
 }
+

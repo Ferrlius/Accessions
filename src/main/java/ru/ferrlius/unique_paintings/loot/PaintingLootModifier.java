@@ -9,15 +9,14 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
+import ru.ferrlius.unique_paintings.data.PaintingThemeManager;
+import ru.ferrlius.unique_paintings.data.PaintingThemePlacement;
 
+import java.util.List;
 
 public class PaintingLootModifier extends LootModifier {
-
-    private final ResourceLocation theme;
-
-    public PaintingLootModifier(LootItemCondition[] conditions, ResourceLocation theme) {
+    public PaintingLootModifier(LootItemCondition[] conditions) {
         super(conditions);
-        this.theme = theme;
     }
 
     @Override
@@ -25,12 +24,13 @@ public class PaintingLootModifier extends LootModifier {
             ObjectArrayList<ItemStack> generatedLoot,
             LootContext context
     ) {
-        generatedLoot.add(
-                PaintingLootHandler.createThemedPainting(
-                        context,
-                        theme
-                )
-        );
+        ResourceLocation lootTableId = context.getQueriedLootTableId();
+        List<PaintingThemePlacement> placements = PaintingThemeManager.getPlacements(lootTableId);
+        for (PaintingThemePlacement placement : placements) {
+            if (context.getRandom().nextFloat() <= placement.chance()) {
+                generatedLoot.add(PaintingLootHandler.createThemedPainting(context, placement.theme()));
+            }
+        }
 
         return generatedLoot;
     }
@@ -43,7 +43,6 @@ public class PaintingLootModifier extends LootModifier {
     public static final MapCodec<PaintingLootModifier> CODEC =
             RecordCodecBuilder.mapCodec(instance ->
                     LootModifier.codecStart(instance)
-                            .and(ResourceLocation.CODEC.fieldOf("theme").forGetter(modifier -> modifier.theme))
                             .apply(instance, PaintingLootModifier::new)
             );
 }

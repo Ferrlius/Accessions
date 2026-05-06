@@ -7,19 +7,28 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.decoration.Painting;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.component.CustomData;
 import org.slf4j.Logger;
 import ru.ferrlius.unique_paintings.data.PaintingThemeManager;
+import ru.ferrlius.unique_paintings.registry.ModPaintingVariants;
 
 import java.util.Optional;
 
-public class PaintingStackHelper {
+public final class PaintingStackHelper {
     private static final Logger LOGGER = LogUtils.getLogger();
+
+    public static final String WIDTH_TAG = "unique_paintings_width";
+    public static final String HEIGHT_TAG = "unique_paintings_height";
+    public static final String ORIGINAL_VARIANT_TAG = "unique_paintings_original_variant";
+
+    private PaintingStackHelper() {
+    }
 
     public static void saveVariant(
             ItemStack stack,
@@ -38,11 +47,23 @@ public class PaintingStackHelper {
                 tag.merge((CompoundTag) encoded)
         );
 
+        tag.putInt(WIDTH_TAG, variant.value().width());
+        tag.putInt(HEIGHT_TAG, variant.value().height());
+
         CustomData.set(DataComponents.ENTITY_DATA, stack, tag);
-        stack.set(DataComponents.MAX_STACK_SIZE, 1);
-        variant.unwrapKey().ifPresent(key ->
-                stack.set(DataComponents.RARITY, PaintingThemeManager.getRarity(key.location()))
-        );
+        applyUniqueComponents(stack, variant.unwrapKey().map(key -> key.location()).orElse(null));
+    }
+
+    public static void saveMissingVariant(ItemStack stack, ResourceLocation variantId, int width, int height) {
+        CompoundTag tag = new CompoundTag();
+        tag.putString("id", EntityType.getKey(EntityType.PAINTING).toString());
+        tag.putString("variant", variantId.toString());
+        tag.putInt(WIDTH_TAG, width);
+        tag.putInt(HEIGHT_TAG, height);
+        tag.putString(ORIGINAL_VARIANT_TAG, variantId.toString());
+
+        CustomData.set(DataComponents.ENTITY_DATA, stack, tag);
+        applyUniqueComponents(stack, variantId);
     }
 
     public static Optional<Holder<PaintingVariant>> getSavedVariant(
@@ -83,34 +104,118 @@ public class PaintingStackHelper {
             return Optional.empty();
         }
 
-        ResourceLocation variantId = ResourceLocation.tryParse(tag.getString("variant"));
-        return Optional.ofNullable(variantId);
+        return Optional.ofNullable(ResourceLocation.tryParse(tag.getString("variant")));
     }
 
-    public static boolean sanitizeInvalidVariant(
-            ItemStack stack,
-            HolderLookup.Provider registries
-    ) {
-        if (!stack.is(Items.PAINTING)) {
-            return false;
-        }
-
-        CustomData entityData = stack.getOrDefault(
-                DataComponents.ENTITY_DATA,
-                CustomData.EMPTY
-        );
-
+    public static Optional<ResourceLocation> getOriginalVariantId(ItemStack stack) {
+        CustomData entityData = stack.getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY);
         if (entityData.isEmpty()) {
-            return false;
+            return Optional.empty();
         }
 
-        if (getSavedVariant(stack, registries).isPresent()) {
-            return false;
+        CompoundTag tag = entityData.copyTag();
+        if (!tag.contains(ORIGINAL_VARIANT_TAG)) {
+            return getSavedVariantId(stack);
         }
 
-        stack.remove(DataComponents.ENTITY_DATA);
-        stack.remove(DataComponents.MAX_STACK_SIZE);
-        stack.remove(DataComponents.RARITY);
-        return true;
+        return Optional.ofNullable(ResourceLocation.tryParse(tag.getString(ORIGINAL_VARIANT_TAG)));
+    }
+
+    public static int getStoredWidth(ItemStack stack) {
+        return getStoredDimension(stack, WIDTH_TAG);
+    }
+
+    public static int getStoredHeight(ItemStack stack) {
+        return getStoredDimension(stack, HEIGHT_TAG);
+    }
+
+    public static boolean isMissingVariant(ItemStack stack, HolderLookup.Provider registries) {
+        return getSavedVariantId(stack).isPresent() && getSavedVariant(stack, registries).isEmpty();
+    }
+
+    public static Optional<Holder<PaintingVariant>> getPlacementVariant(ItemStack stack, HolderLookup.Provider registries) {
+        Optional<Holder<PaintingVariant>> saved = getSavedVariant(stack, registries);
+        if (saved.isPresent()) {
+            return saved;
+        }
+
+        if (getSavedVariantId(stack).isEmpty()) {
+            return Optional.empty();
+        }
+
+        return ModPaintingVariants.getErrorVariant(
+                registries,
+                getStoredWidthOrDefault(stack),
+                getStoredHeightOrDefault(stack)
+        ).map(holder -> holder);
+    }
+
+    public static void markMissingPaintingEntity(Painting painting, ItemStack sourceStack) {
+        ResourceLocation originalId = getOriginalVariantId(sourceStack).orElse(null);
+        if (originalId == null) {
+            return;
+        }
+
+        if (painting instanceof MissingPaintingVariantHolder holder) {
+            holder.uniquePaintings$setMissingVariant(
+                    originalId,
+                    getStoredWidthOrDefault(sourceStack),
+                    getStoredHeightOrDefault(sourceStack)
+            );
+        }
+    }
+
+    public static boolean isMissingPaintingEntity(Painting painting) {
+        return painting instanceof MissingPaintingVariantHolder holder
+                && holder.uniquePaintings$hasMissingVariant();
+    }
+
+    public static ItemStack createStackForPainting(Painting painting) {
+        ItemStack stack = new ItemStack(Items.PAINTING);
+        if (painting instanceof MissingPaintingVariantHolder holder
+                && holder.uniquePaintings$hasMissingVariant()) {
+            saveMissingVariant(
+                    stack,
+                    holder.uniquePaintings$getMissingVariantId(),
+                    holder.uniquePaintings$getMissingWidth(),
+                    holder.uniquePaintings$getMissingHeight()
+            );
+            return stack;
+        }
+
+        saveVariant(stack, painting.registryAccess(), painting.getVariant());
+        return stack;
+    }
+
+    public static Rarity getDisplayRarity(ItemStack stack) {
+        return getOriginalVariantId(stack)
+                .map(PaintingThemeManager::getRarity)
+                .orElse(Rarity.COMMON);
+    }
+
+    private static void applyUniqueComponents(ItemStack stack, ResourceLocation variantId) {
+        stack.set(DataComponents.MAX_STACK_SIZE, 1);
+        stack.set(
+                DataComponents.RARITY,
+                variantId != null ? PaintingThemeManager.getRarity(variantId) : Rarity.COMMON
+        );
+    }
+
+    private static int getStoredDimension(ItemStack stack, String key) {
+        CustomData entityData = stack.getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY);
+        if (entityData.isEmpty()) {
+            return 0;
+        }
+
+        CompoundTag tag = entityData.copyTag();
+        return tag.contains(key) ? tag.getInt(key) : 0;
+    }
+
+    private static int getStoredWidthOrDefault(ItemStack stack) {
+        return Math.max(1, getStoredWidth(stack));
+    }
+
+    private static int getStoredHeightOrDefault(ItemStack stack) {
+        return Math.max(1, getStoredHeight(stack));
     }
 }
