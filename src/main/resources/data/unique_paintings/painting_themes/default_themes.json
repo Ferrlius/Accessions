@@ -1,0 +1,86 @@
+{
+  "painting_themes": [
+    {
+      "theme": "unique_paintings:ancient_city",
+      "loot_tables": [
+        { "loot_table_id": "minecraft:chests/ancient_city", "chance": 0.72 },
+        { "loot_table_id": "minecraft:chests/ancient_city", "chance": 0.38 },
+        { "loot_table_id": "minecraft:chests/ancient_city_ice_box", "chance": 0.35 }
+      ]
+    },
+    {
+      "theme": "unique_paintings:desert",
+      "loot_tables": [
+        { "loot_table_id": "minecraft:chests/desert_pyramid", "chance": 0.45 }
+      ]
+    },
+    {
+      "theme": "unique_paintings:end",
+      "loot_tables": [
+        { "loot_table_id": "minecraft:chests/end_city_treasure", "chance": 0.5 }
+      ]
+    },
+    {
+      "theme": "unique_paintings:jungle",
+      "loot_tables": [
+        { "loot_table_id": "minecraft:chests/jungle_temple", "chance": 0.4 }
+      ]
+    },
+    {
+      "theme": "unique_paintings:mansion",
+      "loot_tables": [
+        { "loot_table_id": "minecraft:chests/woodland_mansion", "chance": 1.0 },
+        { "loot_table_id": "minecraft:chests/woodland_mansion", "chance": 0.85 },
+        { "loot_table_id": "minecraft:chests/woodland_mansion", "chance": 0.55 }
+      ]
+    },
+    {
+      "theme": "unique_paintings:nether",
+      "loot_tables": [
+        { "loot_table_id": "minecraft:chests/bastion_bridge", "chance": 0.35 },
+        { "loot_table_id": "minecraft:chests/bastion_hoglin_stable", "chance": 0.3 },
+        { "loot_table_id": "minecraft:chests/bastion_other", "chance": 0.4 },
+        { "loot_table_id": "minecraft:chests/bastion_treasure", "chance": 0.45 },
+        { "loot_table_id": "minecraft:chests/nether_bridge", "chance": 0.4 },
+        { "loot_table_id": "minecraft:chests/ruined_portal", "chance": 0.2 }
+      ]
+    },
+    {
+      "theme": "unique_paintings:ocean",
+      "loot_tables": [
+        { "loot_table_id": "minecraft:chests/shipwreck_map", "chance": 0.2 },
+        { "loot_table_id": "minecraft:chests/shipwreck_supply", "chance": 0.18 },
+        { "loot_table_id": "minecraft:chests/shipwreck_treasure", "chance": 0.45 },
+        { "loot_table_id": "minecraft:chests/underwater_ruin_big", "chance": 0.7 },
+        { "loot_table_id": "minecraft:chests/underwater_ruin_small", "chance": 0.35 }
+      ]
+    },
+    {
+      "theme": "unique_paintings:ominous",
+      "loot_tables": [
+        { "loot_table_id": "minecraft:chests/pillager_outpost", "chance": 0.2 }
+      ]
+    },
+    {
+      "theme": "unique_paintings:stronghold",
+      "loot_tables": [
+        { "loot_table_id": "minecraft:chests/stronghold_corridor", "chance": 0.4 },
+        { "loot_table_id": "minecraft:chests/stronghold_crossing", "chance": 0.4 },
+        { "loot_table_id": "minecraft:chests/stronghold_library", "chance": 0.7 }
+      ]
+    },
+    {
+      "theme": "unique_paintings:village",
+      "loot_tables": [
+        { "loot_table_id": "minecraft:chests/village/village_cartographer", "chance": 0.3 },
+        { "loot_table_id": "minecraft:chests/village/village_desert_house", "chance": 0.3 },
+        { "loot_table_id": "minecraft:chests/village/village_plains_house", "chance": 0.3 },
+        { "loot_table_id": "minecraft:chests/village/village_savanna_house", "chance": 0.3 },
+        { "loot_table_id": "minecraft:chests/village/village_shepherd", "chance": 0.34 },
+        { "loot_table_id": "minecraft:chests/village/village_snowy_house", "chance": 0.3 },
+        { "loot_table_id": "minecraft:chests/village/village_taiga_house", "chance": 0.3 },
+        { "loot_table_id": "minecraft:chests/village/village_temple", "chance": 0.4 }
+      ]
+    }
+  ]
+}

@@ -1,13 +1,12 @@
 package ru.ferrlius.unique_paintings;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.PaintingVariantTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.entity.npc.WanderingTrader;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -24,12 +23,10 @@ import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import org.slf4j.Logger;
 import ru.ferrlius.unique_paintings.data.PaintingThemeReloadListener;
 import ru.ferrlius.unique_paintings.loot.ModLootModifiers;
-import ru.ferrlius.unique_paintings.registry.ModPaintingVariants;
 import ru.ferrlius.unique_paintings.trade.PaintingTraderListing;
 import ru.ferrlius.unique_paintings.util.PaintingStackHelper;
 
@@ -53,10 +50,8 @@ public class Unique_paintings {
         NeoForge.EVENT_BUS.addListener(this::onServerStarted);
         NeoForge.EVENT_BUS.addListener(this::onDatapackSync);
         NeoForge.EVENT_BUS.addListener(this::onEntityJoinLevel);
-        NeoForge.EVENT_BUS.addListener(this::onItemTooltip);
 
         ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
-        ModPaintingVariants.PAINTING_VARIANTS.register(modEventBus);
 
         LOGGER.info("Paintings are Unique.");
     }
@@ -114,32 +109,6 @@ public class Unique_paintings {
         }
     }
 
-    private void onItemTooltip(ItemTooltipEvent event) {
-        ItemStack stack = event.getItemStack();
-        if (!stack.is(Items.PAINTING)) {
-            return;
-        }
-
-        if (event.getContext().registries() == null
-                || !PaintingStackHelper.isMissingVariant(stack, event.getContext().registries())) {
-            return;
-        }
-
-        List<Component> tooltip = event.getToolTip();
-        String randomText = Component.translatable("painting.random").getString();
-        tooltip.removeIf(component -> component.getString().equals(randomText));
-
-        PaintingStackHelper.getOriginalVariantId(stack).ifPresent(variantId ->
-                tooltip.add(Component.literal(variantId.toString()).withStyle(ChatFormatting.DARK_GRAY))
-        );
-
-        int width = PaintingStackHelper.getStoredWidth(stack);
-        int height = PaintingStackHelper.getStoredHeight(stack);
-        if (width > 0 && height > 0) {
-            tooltip.add(Component.translatable("painting.dimensions", width, height));
-        }
-    }
-
     private void onBuildCreativeTabContents(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             rebuildPaintingTab(event, true);
@@ -161,15 +130,13 @@ public class Unique_paintings {
 
         List<ItemStack> variantStacks = new ArrayList<>();
         if (placeableOnly) {
+            // A blank-variant painting at the top of the list rolls a random
+            // variant when placed — preserves the original creative behavior.
             variantStacks.add(new ItemStack(Items.PAINTING));
         }
 
-        for (Holder.Reference<net.minecraft.world.entity.decoration.PaintingVariant> holder :
+        for (Holder.Reference<PaintingVariant> holder :
                 event.getParameters().holders().lookupOrThrow(Registries.PAINTING_VARIANT).listElements().toList()) {
-            ResourceLocation id = holder.key().location();
-            if (ModPaintingVariants.isErrorVariant(id)) {
-                continue;
-            }
             if (holder.is(PaintingVariantTags.PLACEABLE) != placeableOnly) {
                 continue;
             }
@@ -179,34 +146,21 @@ public class Unique_paintings {
             variantStacks.add(stack);
         }
 
+        // Sort: the blank "random" stack first (no saved variant id),
+        // then by variant id alphabetically.
         variantStacks.sort((left, right) -> {
-            boolean leftRandom = PaintingStackHelper.getSavedVariantId(left).isEmpty();
-            boolean rightRandom = PaintingStackHelper.getSavedVariantId(right).isEmpty();
-            if (leftRandom != rightRandom) {
-                return leftRandom ? -1 : 1;
+            Optional<ResourceLocation> leftId = PaintingStackHelper.getSavedVariantId(left);
+            Optional<ResourceLocation> rightId = PaintingStackHelper.getSavedVariantId(right);
+            if (leftId.isEmpty() && rightId.isEmpty()) {
+                return 0;
             }
-
-            int widthCompare = Integer.compare(
-                    PaintingStackHelper.getStoredWidth(left),
-                    PaintingStackHelper.getStoredWidth(right)
-            );
-            if (widthCompare != 0) {
-                return widthCompare;
+            if (leftId.isEmpty()) {
+                return -1;
             }
-
-            int heightCompare = Integer.compare(
-                    PaintingStackHelper.getStoredHeight(left),
-                    PaintingStackHelper.getStoredHeight(right)
-            );
-            if (heightCompare != 0) {
-                return heightCompare;
+            if (rightId.isEmpty()) {
+                return 1;
             }
-
-            ResourceLocation leftId = PaintingStackHelper.getSavedVariantId(left)
-                    .orElse(ResourceLocation.withDefaultNamespace("painting"));
-            ResourceLocation rightId = PaintingStackHelper.getSavedVariantId(right)
-                    .orElse(ResourceLocation.withDefaultNamespace("painting"));
-            return leftId.toString().compareTo(rightId.toString());
+            return leftId.get().toString().compareTo(rightId.get().toString());
         });
 
         if (variantStacks.isEmpty()) {
@@ -247,7 +201,6 @@ public class Unique_paintings {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -258,12 +211,10 @@ public class Unique_paintings {
                 seenPainting = true;
                 continue;
             }
-
             if (seenPainting) {
                 return entry.copy();
             }
         }
-
         return null;
     }
 }
