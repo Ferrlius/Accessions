@@ -4,8 +4,10 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.decoration.Painting;
@@ -15,6 +17,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.component.CustomData;
 import org.slf4j.Logger;
+import ru.ferrlius.unique_paintings.Unique_paintings;
 import ru.ferrlius.unique_paintings.data.PaintingThemeManager;
 import ru.ferrlius.unique_paintings.registry.ModPaintingVariants;
 
@@ -54,16 +57,34 @@ public final class PaintingStackHelper {
         applyUniqueComponents(stack, variant.unwrapKey().map(key -> key.location()).orElse(null));
     }
 
-    public static void saveMissingVariant(ItemStack stack, ResourceLocation variantId, int width, int height) {
+    public static void saveMissingVariant(
+            ItemStack stack,
+            HolderLookup.Provider registries,
+            ResourceLocation originalVariantId,
+            int width,
+            int height
+    ) {
         CompoundTag tag = new CompoundTag();
         tag.putString("id", EntityType.getKey(EntityType.PAINTING).toString());
-        tag.putString("variant", variantId.toString());
-        tag.putInt(WIDTH_TAG, width);
-        tag.putInt(HEIGHT_TAG, height);
-        tag.putString(ORIGINAL_VARIANT_TAG, variantId.toString());
+
+        ResourceLocation fallbackVariantId = ModPaintingVariants.getErrorVariant(
+                registries,
+                Math.max(1, width),
+                Math.max(1, height)
+        ).flatMap(Holder::unwrapKey)
+                .map(key -> key.location())
+                .orElseGet(() -> ResourceLocation.fromNamespaceAndPath(
+                        Unique_paintings.MODID,
+                        "texture_error_1x1"
+                ));
+
+        tag.putString("variant", fallbackVariantId.toString());
+        tag.putInt(WIDTH_TAG, Math.max(1, width));
+        tag.putInt(HEIGHT_TAG, Math.max(1, height));
+        tag.putString(ORIGINAL_VARIANT_TAG, originalVariantId.toString());
 
         CustomData.set(DataComponents.ENTITY_DATA, stack, tag);
-        applyUniqueComponents(stack, variantId);
+        applyUniqueComponents(stack, originalVariantId);
     }
 
     public static Optional<Holder<PaintingVariant>> getSavedVariant(
@@ -121,6 +142,20 @@ public final class PaintingStackHelper {
         return Optional.ofNullable(ResourceLocation.tryParse(tag.getString(ORIGINAL_VARIANT_TAG)));
     }
 
+    public static Optional<Holder<PaintingVariant>> getOriginalVariant(
+            ItemStack stack,
+            HolderLookup.Provider registries
+    ) {
+        Optional<ResourceLocation> originalId = getOriginalVariantId(stack);
+        if (originalId.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return registries.lookupOrThrow(Registries.PAINTING_VARIANT)
+                .get(ResourceKey.create(Registries.PAINTING_VARIANT, originalId.get()))
+                .map(holder -> holder);
+    }
+
     public static int getStoredWidth(ItemStack stack) {
         return getStoredDimension(stack, WIDTH_TAG);
     }
@@ -130,24 +165,19 @@ public final class PaintingStackHelper {
     }
 
     public static boolean isMissingVariant(ItemStack stack, HolderLookup.Provider registries) {
-        return getSavedVariantId(stack).isPresent() && getSavedVariant(stack, registries).isEmpty();
+        return getOriginalVariantId(stack)
+                .filter(originalId -> !originalId.equals(getSavedVariantId(stack).orElse(null)))
+                .isPresent()
+                && getOriginalVariant(stack, registries).isEmpty();
     }
 
     public static Optional<Holder<PaintingVariant>> getPlacementVariant(ItemStack stack, HolderLookup.Provider registries) {
-        Optional<Holder<PaintingVariant>> saved = getSavedVariant(stack, registries);
-        if (saved.isPresent()) {
-            return saved;
+        Optional<Holder<PaintingVariant>> original = getOriginalVariant(stack, registries);
+        if (original.isPresent()) {
+            return original;
         }
 
-        if (getSavedVariantId(stack).isEmpty()) {
-            return Optional.empty();
-        }
-
-        return ModPaintingVariants.getErrorVariant(
-                registries,
-                getStoredWidthOrDefault(stack),
-                getStoredHeightOrDefault(stack)
-        ).map(holder -> holder);
+        return getSavedVariant(stack, registries).map(holder -> holder);
     }
 
     public static void markMissingPaintingEntity(Painting painting, ItemStack sourceStack) {
@@ -176,6 +206,7 @@ public final class PaintingStackHelper {
                 && holder.uniquePaintings$hasMissingVariant()) {
             saveMissingVariant(
                     stack,
+                    painting.registryAccess(),
                     holder.uniquePaintings$getMissingVariantId(),
                     holder.uniquePaintings$getMissingWidth(),
                     holder.uniquePaintings$getMissingHeight()
