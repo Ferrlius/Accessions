@@ -1,0 +1,11 @@
+{
+  "painting_themes": [
+    {
+      "theme": "accessions:witch_hut",
+      "loot_tables": [
+        { "loot_table_id": "betterwitchhuts:chests/hut_0", "chance": 0.45 }
+      ]
+    }
+  ]
+}
+

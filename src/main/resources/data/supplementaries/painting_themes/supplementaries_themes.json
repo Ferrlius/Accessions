@@ -1,0 +1,11 @@
+{
+  "painting_themes": [
+    {
+      "theme": "accessions:ocean",
+      "loot_tables": [
+        { "loot_table_id": "supplementaries:loot/galleon/chest", "chance": 0.45 }
+      ]
+    }
+  ]
+}
+

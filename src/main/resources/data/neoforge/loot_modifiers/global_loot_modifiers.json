@@ -1,7 +1,8 @@
 {
   "replace": false,
   "entries": [
-    "unique_paintings:painting_loot"
+    "accessions:painting_loot"
   ]
 }
+
 

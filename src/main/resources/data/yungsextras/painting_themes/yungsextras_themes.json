@@ -1,0 +1,18 @@
+{
+  "painting_themes": [
+    {
+      "theme": "accessions:desert",
+      "loot_tables": [
+        { "loot_table_id": "yungsextras:desert/ruins", "chance": 0.35 },
+        { "loot_table_id": "yungsextras:desert/chillzone", "chance": 0.20 }
+      ]
+    },
+    {
+      "theme": "accessions:desert_archaeology",
+      "loot_tables": [
+        { "loot_table_id": "yungsextras:desert/extra_archeology", "chance": 0.025 }
+      ]
+    }
+  ]
+}
+

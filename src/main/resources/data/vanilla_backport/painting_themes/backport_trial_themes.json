@@ -1,0 +1,21 @@
+{
+  "painting_themes": [
+    {
+      "theme": "accessions:trial_chambers",
+      "loot_tables": [
+        { "loot_table_id": "minecraft:chests/trial_chambers/reward_ominous_unique", "chance": 0.55 },
+        { "loot_table_id": "minecraft:chests/trial_chambers/reward_unique", "chance": 0.40 },
+        { "loot_table_id": "minecraft:chests/trial_chambers/reward_ominous_rare", "chance": 0.18 },
+        { "loot_table_id": "minecraft:chests/trial_chambers/reward_rare", "chance": 0.12 },
+        { "loot_table_id": "minecraft:chests/trial_chambers/supply", "chance": 0.06 }
+      ]
+    },
+    {
+     "theme": "accessions:archaeology",
+      "loot_tables": [
+        { "loot_table_id": "minecraft:archaeology/trail_ruins_common", "chance": 0.015 },
+        { "loot_table_id": "minecraft:archaeology/trail_ruins_rare", "chance": 0.05 }
+      ]
+    }
+  ]
+}

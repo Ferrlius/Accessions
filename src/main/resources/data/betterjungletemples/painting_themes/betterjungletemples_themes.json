@@ -1,0 +1,12 @@
+{
+  "painting_themes": [
+    {
+      "theme": "accessions:jungle",
+      "loot_tables": [
+        { "loot_table_id": "betterjungletemples:chests/treasure", "chance": 0.70 },
+        { "loot_table_id": "betterjungletemples:chests/campsite", "chance": 0.25 }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,11 @@
+{
+  "painting_themes": [
+    {
+      "theme": "accessions:ocean",
+      "loot_tables": [
+        { "loot_table_id": "betteroceanmonuments:chests/upper_side_chamber", "chance": 0.55 }
+      ]
+    }
+  ]
+}
+

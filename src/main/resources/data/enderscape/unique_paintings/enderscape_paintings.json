@@ -1,0 +1,8 @@
+{
+  "paintings": [
+    { "id": "enderscape:grape_static", "weight": 4, "rarity": "rare", "themes": [
+      "accessions:end",
+      "accessions:mirestone_ruins"
+    ] }
+  ]
+}

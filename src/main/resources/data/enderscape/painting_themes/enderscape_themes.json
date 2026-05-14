@@ -1,0 +1,18 @@
+{
+  "painting_themes": [
+    {
+      "theme": "accessions:end",
+      "loot_tables": [
+        { "loot_table_id": "enderscape:end_city/chest", "chance": 0.35 },
+        { "loot_table_id": "enderscape:end_city/vault", "chance": 0.60 }
+      ]
+    },
+    {
+      "theme": "accessions:mirestone_ruins",
+      "loot_tables": [
+        { "loot_table_id": "enderscape:mirestone_ruins/chest", "chance": 0.45 }
+      ]
+    }
+  ]
+}
+

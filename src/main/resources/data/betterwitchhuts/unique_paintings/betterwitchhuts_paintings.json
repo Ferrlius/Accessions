@@ -1,0 +1,11 @@
+{
+  "paintings": [
+    { "id": "minecraft:creebet", "weight": 3, "rarity": "rare", "themes": ["accessions:witch_hut"] },
+    { "id": "minecraft:pointer", "weight": 2, "rarity": "uncommon", "themes": ["accessions:witch_hut"] },
+    { "id": "minecraft:burning_skull", "weight": 4, "rarity": "rare", "themes": ["accessions:witch_hut"] },
+    { "id": "portfolio:awful_housing", "weight": 2, "rarity": "common", "themes": ["accessions:witch_hut"] },
+    { "id": "portfolio:justice", "weight": 2, "rarity": "uncommon", "themes": ["accessions:witch_hut"] },
+    { "id": "portfolio:operator", "weight": 2, "rarity": "rare", "themes": ["accessions:witch_hut"] },
+    { "id": "portfolio:squid_games", "weight": 2, "rarity": "uncommon", "themes": ["accessions:witch_hut"] }
+  ]
+}

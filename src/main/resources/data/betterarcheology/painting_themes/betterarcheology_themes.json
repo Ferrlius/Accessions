@@ -1,0 +1,60 @@
+{
+  "painting_themes": [
+    {
+      "theme": "accessions:catacombs",
+      "loot_tables": [
+        { "loot_table_id": "betterarcheology:archeology/chest_catacombs_golden", "chance": 0.80 },
+        { "loot_table_id": "betterarcheology:archeology/chest_catacombs_library", "chance": 0.30 }
+      ]
+    },
+    {
+      "theme": "accessions:light_temple",
+      "loot_tables": [
+        { "loot_table_id": "betterarcheology:archeology/chest_light_temple_treasure", "chance": 0.75 }
+      ]
+    },
+    {
+      "theme": "accessions:jungle",
+      "loot_tables": [
+        { "loot_table_id": "betterarcheology:archeology/chest_jungle_temple_treasure", "chance": 0.60 }
+      ]
+    },
+    {
+      "theme": "accessions:desert",
+      "loot_tables": [
+        { "loot_table_id": "betterarcheology:archeology/chest_buried_ruins_sand", "chance": 0.35 },
+        { "loot_table_id": "betterarcheology:archeology/chest_tumulus", "chance": 0.40 },
+        { "loot_table_id": "betterarcheology:archeology/chest_mott", "chance": 0.30 }
+      ]
+    },
+    {
+      "theme": "accessions:mesa_ruins",
+      "loot_tables": [
+        { "loot_table_id": "betterarcheology:archeology/chest_mesa_ruins", "chance": 0.45 }
+      ]
+    },
+    {
+      "theme": "accessions:ocean",
+      "loot_tables": [
+        { "loot_table_id": "betterarcheology:archeology/chest_underwater", "chance": 0.30 }
+      ]
+    },
+    {
+      "theme": "accessions:ancient_city",
+      "loot_tables": [
+        { "loot_table_id": "betterarcheology:archeology/chest_sculk_sword", "chance": 0.60 }
+      ]
+    },
+    {
+      "theme": "accessions:archaeology",
+      "loot_tables": [
+        { "loot_table_id": "betterarcheology:archeology/desert_sand", "chance": 0.015 },
+        { "loot_table_id": "betterarcheology:archeology/mesa_red_sand", "chance": 0.015 },
+        { "loot_table_id": "betterarcheology:archeology/plains_gravel", "chance": 0.012 },
+        { "loot_table_id": "betterarcheology:archeology/taiga_dirt", "chance": 0.012 },
+        { "loot_table_id": "betterarcheology:archeology/sussand_underwater", "chance": 0.015 }
+      ]
+    }
+  ]
+}
+

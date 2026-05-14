@@ -1,0 +1,14 @@
+{
+  "painting_themes": [
+    {
+      "theme": "accessions:stronghold",
+      "loot_tables": [
+        { "loot_table_id": "betterstrongholds:chests/treasure", "chance": 0.75 },
+        { "loot_table_id": "betterstrongholds:chests/grand_library", "chance": 0.50 },
+        { "loot_table_id": "betterstrongholds:chests/library_md", "chance": 0.30 },
+        { "loot_table_id": "betterstrongholds:chests/cmd_yung", "chance": 0.40 }
+      ]
+    }
+  ]
+}
+

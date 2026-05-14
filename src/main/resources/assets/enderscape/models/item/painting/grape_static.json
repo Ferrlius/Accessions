@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "enderscape:item/painting/grape_static"
+  }
+}

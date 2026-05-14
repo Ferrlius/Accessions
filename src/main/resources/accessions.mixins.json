@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "ru.ferrlius.accessions.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "PaintingMixin",
+    "HangingEntityItemMixin",
+    "FastPaintingsBlockEntityMixin",
+    "FastPaintingsBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
+

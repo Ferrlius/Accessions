@@ -1,0 +1,38 @@
+{
+  "paintings": [
+    { "id": "minecraft:skeleton", "weight": 4, "rarity": "rare", "themes": ["accessions:catacombs"] },
+    { "id": "minecraft:skull_and_roses", "weight": 4, "rarity": "rare", "themes": ["accessions:catacombs"] },
+    { "id": "minecraft:wither", "weight": 2, "rarity": "epic", "themes": ["accessions:catacombs"] },
+    { "id": "minecraft:orb", "weight": 3, "rarity": "rare", "themes": ["accessions:catacombs"] },
+    { "id": "minecraft:passage", "weight": 3, "rarity": "rare", "themes": ["accessions:catacombs"] },
+    { "id": "minecraft:baroque", "weight": 3, "rarity": "rare", "themes": ["accessions:catacombs"] },
+    { "id": "minecraft:bust", "weight": 3, "rarity": "rare", "themes": ["accessions:catacombs"] },
+    { "id": "portfolio:death", "weight": 3, "rarity": "epic", "themes": ["accessions:catacombs"] },
+    { "id": "portfolio:macabre", "weight": 4, "rarity": "rare", "themes": ["accessions:catacombs"] },
+    { "id": "portfolio:post_mortem", "weight": 3, "rarity": "rare", "themes": ["accessions:catacombs"] },
+    { "id": "portfolio:statue", "weight": 2, "rarity": "uncommon", "themes": ["accessions:catacombs", "accessions:archaeology"] },
+
+    { "id": "minecraft:earth", "weight": 3, "rarity": "common", "themes": ["accessions:light_temple"] },
+    { "id": "minecraft:sunflowers", "weight": 3, "rarity": "common", "themes": ["accessions:light_temple"] },
+    { "id": "minecraft:sunset", "weight": 2, "rarity": "common", "themes": ["accessions:light_temple"] },
+    { "id": "minecraft:pond", "weight": 2, "rarity": "common", "themes": ["accessions:light_temple"] },
+    { "id": "portfolio:luminescent", "weight": 3, "rarity": "uncommon", "themes": ["accessions:light_temple"] },
+    { "id": "portfolio:sunflower", "weight": 3, "rarity": "uncommon", "themes": ["accessions:light_temple"] },
+    { "id": "portfolio:cherry_moon", "weight": 2, "rarity": "common", "themes": ["accessions:light_temple"] },
+
+    { "id": "minecraft:aztec", "weight": 4, "rarity": "common", "themes": ["accessions:mesa_ruins", "accessions:archaeology"] },
+    { "id": "minecraft:aztec2", "weight": 4, "rarity": "common", "themes": ["accessions:mesa_ruins", "accessions:archaeology"] },
+    { "id": "minecraft:wasteland", "weight": 4, "rarity": "uncommon", "themes": ["accessions:mesa_ruins"] },
+    { "id": "clayworks:baked", "weight": 4, "rarity": "uncommon", "themes": ["accessions:mesa_ruins", "accessions:archaeology"] },
+    { "id": "portfolio:pyramid", "weight": 4, "rarity": "common", "themes": ["accessions:mesa_ruins"] },
+    { "id": "portfolio:sandstones", "weight": 4, "rarity": "common", "themes": ["accessions:mesa_ruins", "accessions:archaeology"] },
+    { "id": "portfolio:red_dawn", "weight": 3, "rarity": "common", "themes": ["accessions:mesa_ruins"] },
+    { "id": "portfolio:mountains", "weight": 2, "rarity": "common", "themes": ["accessions:mesa_ruins"] },
+    { "id": "portfolio:yonder", "weight": 2, "rarity": "common", "themes": ["accessions:mesa_ruins"] },
+
+    { "id": "minecraft:changing", "weight": 2, "rarity": "common", "themes": ["accessions:archaeology"] },
+    { "id": "minecraft:wanderer", "weight": 2, "rarity": "common", "themes": ["accessions:archaeology"] },
+    { "id": "portfolio:journeys_end", "weight": 2, "rarity": "uncommon", "themes": ["accessions:archaeology"] },
+    { "id": "portfolio:windmill_field", "weight": 2, "rarity": "common", "themes": ["accessions:archaeology"] }
+  ]
+}

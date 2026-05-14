@@ -1,0 +1,159 @@
+{
+  "paintings": [
+    { "id": "minecraft:skeleton", "weight": 5, "rarity": "rare", "themes": [
+      "accessions:ancient_city",
+      "accessions:ominous"
+    ] },
+    { "id": "minecraft:skull_and_roses", "weight": 4, "rarity": "rare", "themes": [
+      "accessions:ancient_city",
+      "accessions:nether"
+    ] },
+    { "id": "minecraft:wither", "weight": 3, "rarity": "epic", "themes": [
+      "accessions:ancient_city",
+      "accessions:nether",
+      "accessions:ominous"
+    ] },
+    { "id": "minecraft:orb", "weight": 3, "rarity": "rare", "themes": [
+      "accessions:ancient_city",
+      "accessions:end",
+      "accessions:nether",
+      "accessions:ominous",
+      "accessions:stronghold"
+    ] },
+    { "id": "minecraft:changing", "weight": 3, "rarity": "common", "themes": [
+      "accessions:ancient_city",
+      "accessions:end",
+      "accessions:stronghold"
+    ] },
+    { "id": "minecraft:passage", "weight": 3, "rarity": "rare", "themes": [
+      "accessions:ancient_city",
+      "accessions:end",
+      "accessions:stronghold"
+    ] },
+    { "id": "minecraft:lowmist", "weight": 2, "rarity": "uncommon", "themes": [
+      "accessions:ancient_city",
+      "accessions:ocean",
+      "accessions:stronghold"
+    ] },
+    { "id": "minecraft:aztec", "weight": 4, "rarity": "common", "themes": [
+      "accessions:desert",
+      "accessions:jungle"
+    ] },
+    { "id": "minecraft:aztec2", "weight": 4, "rarity": "common", "themes": [
+      "accessions:desert",
+      "accessions:jungle"
+    ] },
+    { "id": "minecraft:wasteland", "weight": 5, "rarity": "uncommon", "themes": [
+      "accessions:desert",
+      "accessions:mansion",
+      "accessions:nether"
+    ] },
+    { "id": "minecraft:prairie_ride", "weight": 3, "rarity": "common", "themes": [
+      "accessions:desert"
+    ] },
+    { "id": "minecraft:sunset", "weight": 2, "rarity": "common", "themes": [
+      "accessions:desert",
+      "accessions:mansion",
+      "accessions:village"
+    ] },
+    { "id": "minecraft:kebab", "weight": 2, "rarity": "common", "themes": [
+      "accessions:desert"
+    ] },
+    { "id": "minecraft:void", "weight": 5, "rarity": "rare", "themes": [
+      "accessions:end"
+    ] },
+    { "id": "minecraft:endboss", "weight": 5, "rarity": "epic", "themes": [
+      "accessions:end",
+      "accessions:stronghold"
+    ] },
+    { "id": "minecraft:wanderer", "weight": 2, "rarity": "common", "themes": [
+      "accessions:end",
+      "accessions:ocean",
+      "accessions:stronghold",
+      "accessions:village"
+    ] },
+    { "id": "minecraft:earth", "weight": 3, "rarity": "common", "themes": [
+      "accessions:jungle"
+    ] },
+    { "id": "minecraft:fern", "weight": 5, "rarity": "common", "themes": [
+      "accessions:jungle",
+      "accessions:mansion"
+    ] },
+    { "id": "minecraft:plant", "weight": 4, "rarity": "common", "themes": [
+      "accessions:jungle",
+      "accessions:village"
+    ] },
+    { "id": "minecraft:sunflowers", "weight": 2, "rarity": "common", "themes": [
+      "accessions:jungle",
+      "accessions:mansion",
+      "accessions:village"
+    ] },
+    { "id": "minecraft:pond", "weight": 2, "rarity": "common", "themes": [
+      "accessions:jungle",
+      "accessions:mansion",
+      "accessions:ocean",
+      "accessions:village"
+    ] },
+    { "id": "minecraft:baroque", "weight": 4, "rarity": "rare", "themes": [
+      "accessions:mansion",
+      "accessions:stronghold"
+    ] },
+    { "id": "minecraft:bouquet", "weight": 3, "rarity": "common", "themes": [
+      "accessions:mansion",
+      "accessions:village"
+    ] },
+    { "id": "minecraft:bust", "weight": 3, "rarity": "rare", "themes": [
+      "accessions:mansion",
+      "accessions:stronghold"
+    ] },
+    { "id": "minecraft:cotan", "weight": 2, "rarity": "common", "themes": [
+      "accessions:mansion",
+      "accessions:village"
+    ] },
+    { "id": "minecraft:courbet", "weight": 2, "rarity": "uncommon", "themes": [
+      "accessions:mansion",
+      "accessions:stronghold",
+      "accessions:village"
+    ] },
+    { "id": "minecraft:pool", "weight": 3, "rarity": "uncommon", "themes": [
+      "accessions:mansion",
+      "accessions:ocean"
+    ] },
+    { "id": "minecraft:humble", "weight": 2, "rarity": "common", "themes": [
+      "accessions:mansion",
+      "accessions:village"
+    ] },
+    { "id": "minecraft:sea", "weight": 2, "rarity": "uncommon", "themes": [
+      "accessions:mansion",
+      "accessions:ocean"
+    ] },
+    { "id": "minecraft:water", "weight": 2, "rarity": "uncommon", "themes": [
+      "accessions:mansion",
+      "accessions:ocean"
+    ] },
+    { "id": "minecraft:creebet", "weight": 2, "rarity": "rare", "themes": [
+      "accessions:mansion",
+      "accessions:ominous"
+    ] },
+    { "id": "minecraft:pointer", "weight": 1, "rarity": "uncommon", "themes": [
+      "accessions:mansion",
+      "accessions:nether",
+      "accessions:ominous",
+      "accessions:stronghold"
+    ] },
+    { "id": "minecraft:burning_skull", "weight": 5, "rarity": "rare", "themes": [
+      "accessions:nether",
+      "accessions:ominous"
+    ] },
+    { "id": "minecraft:fire", "weight": 5, "rarity": "uncommon", "themes": [
+      "accessions:nether"
+    ] },
+    { "id": "minecraft:tides", "weight": 5, "rarity": "common", "themes": [
+      "accessions:ocean"
+    ] }
+  ]
+}
+
+
+
+

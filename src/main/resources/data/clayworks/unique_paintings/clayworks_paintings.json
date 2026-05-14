@@ -1,0 +1,11 @@
+{
+  "paintings": [
+    { "id": "clayworks:baked", "weight": 4, "rarity": "uncommon", "themes": [
+      "accessions:desert",
+      "accessions:warm_village",
+      "accessions:mesa_ruins",
+      "accessions:desert_archaeology",
+      "accessions:archaeology"
+    ] }
+  ]
+}

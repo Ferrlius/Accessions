@@ -1,0 +1,20 @@
+{
+  "painting_themes": [
+    {
+      "theme": "accessions:desert",
+      "loot_tables": [
+        { "loot_table_id": "betterdeserttemples:chests/tomb_pharaoh", "chance": 0.85 },
+        { "loot_table_id": "betterdeserttemples:chests/pharaoh_hidden", "chance": 0.70 },
+        { "loot_table_id": "betterdeserttemples:chests/tomb", "chance": 0.25 },
+        { "loot_table_id": "betterdeserttemples:chests/library", "chance": 0.30 },
+        { "loot_table_id": "betterdeserttemples:chests/lab", "chance": 0.22 },
+        { "loot_table_id": "betterdeserttemples:chests/statue", "chance": 0.20 },
+        { "loot_table_id": "betterdeserttemples:chests/wardrobe", "chance": 0.15 },
+        { "loot_table_id": "betterdeserttemples:chests/storage", "chance": 0.10 },
+        { "loot_table_id": "betterdeserttemples:chests/food_storage", "chance": 0.08 },
+        { "loot_table_id": "betterdeserttemples:chests/pot", "chance": 0.05 }
+      ]
+    }
+  ]
+}
+
