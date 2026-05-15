@@ -1,10 +1,7 @@
 {
   "paintings": [
     { "id": "netherexp:house", "weight": 4, "rarity": "rare", "themes": [
-      "accessions:nether",
-      "accessions:nether_bastion",
-      "accessions:nether_fortress",
-      "accessions:ruined_portal"
+      "accessions:nether_bastion"
     ] }
   ]
 }

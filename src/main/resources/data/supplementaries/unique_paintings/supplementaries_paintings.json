@@ -4,10 +4,6 @@
       "accessions:ocean",
       "accessions:ominous",
       "accessions:nether_bastion"
-    ] },
-    { "id": "supplementaries:jar", "weight": 1, "rarity": "rare", "themes": [
-      "accessions:ocean",
-      "accessions:ominous"
     ] }
   ]
 }

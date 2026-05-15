@@ -23,7 +23,6 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
@@ -32,7 +31,7 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import org.slf4j.Logger;
-import ru.ferrlius.accessions.client.AccessionsConfigScreen;
+import ru.ferrlius.accessions.client.AccessionsClient;
 import ru.ferrlius.accessions.config.AccessionsConfig;
 import ru.ferrlius.accessions.data.PaintingThemeReloadListener;
 import ru.ferrlius.accessions.loot.ModLootModifiers;
@@ -56,19 +55,29 @@ public class Accessions {
     public Accessions(IEventBus modEventBus, ModContainer modContainer) {
         // Creative tab rebuild is parked for now. It needs another pass and it is not worth pretending otherwise.
         // modEventBus.addListener(this::onBuildCreativeTabContents);
+
         modContainer.registerConfig(ModConfig.Type.COMMON, AccessionsConfig.SPEC);
+
+        // Client-side hooks are isolated in their own class so the dedicated
+        // server's classloader never has a reason to resolve the client-only
+        // symbols (IConfigScreenFactory, Screen, etc).
         if (FMLEnvironment.dist.isClient()) {
-            modContainer.registerExtensionPoint(
-                    IConfigScreenFactory.class,
-                    (IConfigScreenFactory) (container, parentScreen) -> new AccessionsConfigScreen(parentScreen)
-            );
+            AccessionsClient.register(modContainer);
         }
 
         NeoForge.EVENT_BUS.addListener(this::onAddReloadListeners);
         NeoForge.EVENT_BUS.addListener(this::onServerStarted);
         NeoForge.EVENT_BUS.addListener(this::onDatapackSync);
         NeoForge.EVENT_BUS.addListener(this::onEntityJoinLevel);
-        NeoForge.EVENT_BUS.addListener(this::onItemTooltip);
+
+        // ItemTooltipEvent is only ever fired on the client. Subscribing on
+        // the dedicated server is harmless (it just never fires), but
+        // gating the subscription here keeps the server's listener list
+        // smaller and avoids any chance of accidental cross-side class
+        // resolution from the handler body.
+        if (FMLEnvironment.dist.isClient()) {
+            NeoForge.EVENT_BUS.addListener(this::onItemTooltip);
+        }
 
         ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
         ModPaintingVariants.PAINTING_VARIANTS.register(modEventBus);
@@ -176,8 +185,6 @@ public class Accessions {
 
         List<ItemStack> variantStacks = new ArrayList<>();
         if (placeableOnly) {
-            // A blank-variant painting at the top of the list rolls a random
-            // variant when placed — preserves the original creative behavior.
             variantStacks.add(new ItemStack(Items.PAINTING));
         }
 
@@ -192,8 +199,6 @@ public class Accessions {
             variantStacks.add(stack);
         }
 
-        // Sort: the blank "random" stack first (no saved variant id),
-        // then by variant id alphabetically.
         variantStacks.sort((left, right) -> {
             Optional<ResourceLocation> leftId = PaintingStackHelper.getSavedVariantId(left);
             Optional<ResourceLocation> rightId = PaintingStackHelper.getSavedVariantId(right);
@@ -264,4 +269,3 @@ public class Accessions {
         return null;
     }
 }
-

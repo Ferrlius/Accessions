@@ -1,0 +1,8 @@
+{
+  "paintings": [
+    { "id": "minecraft:orb", "weight": 3, "rarity": "rare", "themes": ["accessions:trial_chambers"] },
+    { "id": "minecraft:changing", "weight": 3, "rarity": "common", "themes": ["accessions:trial_chambers"] },
+    { "id": "minecraft:passage", "weight": 3, "rarity": "rare", "themes": ["accessions:trial_chambers"] },
+    { "id": "minecraft:skeleton", "weight": 3, "rarity": "rare", "themes": ["accessions:trial_chambers"] }
+  ]
+}

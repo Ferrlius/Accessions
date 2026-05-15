@@ -1,0 +1,9 @@
+{
+  "paintings": [
+    { "id": "portfolio:gears", "weight": 3, "rarity": "uncommon", "themes": ["accessions:trial_chambers"] },
+    { "id": "portfolio:heartbeat", "weight": 2, "rarity": "uncommon", "themes": ["accessions:trial_chambers"] },
+    { "id": "portfolio:journeys_end", "weight": 2, "rarity": "uncommon", "themes": ["accessions:trial_chambers"] },
+    { "id": "portfolio:shapes", "weight": 2, "rarity": "uncommon", "themes": ["accessions:trial_chambers"] },
+    { "id": "portfolio:stair_hall", "weight": 2, "rarity": "uncommon", "themes": ["accessions:trial_chambers"] }
+  ]
+}

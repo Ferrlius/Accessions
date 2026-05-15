@@ -316,6 +316,12 @@ public class AccessionsConfigScreen extends Screen {
         int rowHeight = 12;
         int boxHeight = suggestions.size() * rowHeight + 4;
 
+        // Push pose forward so the popup is drawn above every widget that
+        // super.render() drew earlier (buttons, EditBox, etc). Vanilla uses
+        // 400 for tooltips — the same band is correct for autocomplete.
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(0.0F, 0.0F, 400.0F);
+
         guiGraphics.fill(x, y, x + width, y + boxHeight, 0xE0101010);
         guiGraphics.fill(x - 1, y - 1, x + width + 1, y, 0xFF707070);
         guiGraphics.fill(x - 1, y + boxHeight, x + width + 1, y + boxHeight + 1, 0xFF707070);
@@ -330,6 +336,8 @@ public class AccessionsConfigScreen extends Screen {
             guiGraphics.drawString(this.font, this.font.plainSubstrByWidth(suggestions.get(i), width - 6), x + 3, rowY, 0xE0E0E0);
             rowY += rowHeight;
         }
+
+        guiGraphics.pose().popPose();
     }
 
     private boolean clickSuggestion(double mouseX, double mouseY) {
@@ -372,16 +380,34 @@ public class AccessionsConfigScreen extends Screen {
     }
 
     private SuggestionPopup getSuggestionPopup() {
-        int width = Math.min(220, Math.max(140, longestSuggestionWidth() + 8));
-        int x = activeSuggestionInput.getX() + activeSuggestionInput.getWidth() + 4;
-        if (x + width > this.width - 8) {
-            x = activeSuggestionInput.getX() - width - 4;
-        }
-        if (x < 8) {
-            x = Math.max(8, this.width - width - 8);
+        // Width matches the input so the popup feels visually attached to it.
+        // Clamp into a sensible band so the popup is still readable on very
+        // narrow EditBoxes and not absurdly wide on very wide ones.
+        int width = Math.min(
+                Math.max(activeSuggestionInput.getWidth(), 140),
+                Math.max(longestSuggestionWidth() + 8, 220)
+        );
+
+        // Anchor under the input, aligned to its left edge.
+        int x = activeSuggestionInput.getX();
+        int y = activeSuggestionInput.getY() + activeSuggestionInput.getHeight() + 2;
+
+        // If the popup would drop off the bottom of the screen, flip it above
+        // the input instead.
+        int popupHeight = suggestions.size() * 12 + 4;
+        if (y + popupHeight > this.height - 8) {
+            y = activeSuggestionInput.getY() - popupHeight - 2;
         }
 
-        int y = activeSuggestionInput.getY();
+        // Keep horizontal alignment in-bounds in case the input is itself
+        // near the screen edge.
+        if (x + width > this.width - 8) {
+            x = this.width - width - 8;
+        }
+        if (x < 8) {
+            x = 8;
+        }
+
         return new SuggestionPopup(x, y, width);
     }
 
